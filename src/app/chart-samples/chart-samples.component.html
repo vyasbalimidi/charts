@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 dld-header">
+      Chart Samples
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <input [(ngModel)]="chartData[0]">
+    </div>
+    <div class="col-md-2">
+      <input [(ngModel)]="chartData[1]">
+    </div>
+    <div class="col-md-2">
+      <input [(ngModel)]="chartData[2]">
+    </div>
+    <div class="col-md-2">
+      <input [(ngModel)]="chartData[3]">
+    </div>
+    <div class="col-md-2">
+      <input [(ngModel)]="chartData[4]">
+    </div>
+    <div class="col-md-2">
+      <button (click)="onApply()">Apply</button>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-md-6">
+    <div style="display: block;">
+      <canvas baseChart
+                  [datasets]="chartDataSeries"
+                  [labels]="chartLabels"
+                  [options]="{ scaleShowVerticalLines: false, responsive: true }"
+                  [legend]="true"
+                  [chartType]="'line'"></canvas>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div>
+      <div style="display: block">
+        <canvas baseChart
+                [datasets]="chartDataSeries"
+                [labels]="chartLabels"
+                [options]="{ scaleShowVerticalLines: false, responsive: true }"
+                [legend]="true"
+                [chartType]="'bar'"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-6">
+    <div style="display: block">
+      <canvas baseChart
+              [data]="chartData"
+              [labels]="chartLabels"
+              [chartType]="'doughnut'"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div style="display: block">
+      <canvas baseChart
+              [data]="chartData"
+              [labels]="chartLabels"
+              [chartType]="'pie'"></canvas>
+    </div>
+  </div>
+</div>
