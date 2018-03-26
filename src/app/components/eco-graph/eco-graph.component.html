@@ -1,0 +1,24 @@
+<ngx-spinner
+  bdOpacity = 0.8
+  bdColor = "#e6e6e6"
+  size = "large"
+  color = "#166cad"
+  type = "ball-spin-clockwise"
+></ngx-spinner>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 header">
+      ECO Numbers
+    </div>
+  </div>
+</div>
+
+<div style="display: block">
+  <canvas baseChart
+          [data]="pieChartData" 
+          [labels]="pieChartLabels" 
+          [chartType]="pieChartType" 
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
