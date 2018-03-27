@@ -7,29 +7,46 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./dld-graph.component.css']
 })
 export class DldGraphComponent implements OnInit {
-  fileRead: any
-  public axisX: number[] = [];
-  public dataSeries: any[] = [
-    { data: [], label: 'First Run' }
+  public axisX: number[] = []
+  public dataSeries: { data: number[], label: string }[] = [
+    { data: [], label: 'No Data' }
   ];
 
   constructor(private spinner: NgxSpinnerService) { }
 
   ngOnInit() { }
 
-  convertFile(csv: any) {
-    this.spinner.show()
-    this.fileRead = csv.target.files[0]
+  onFileSelection(selected: any) {
+    let files = selected.target.files
 
+    if (files && files.length > 0) {
+      this.spinner.show()
+
+      for (let file of files) {
+        this.readFile(file)
+      }
+
+      setTimeout(() => {
+        this.dataSeries = this.dataSeries.splice(1, files.length)
+      });
+
+      this.spinner.hide()
+    }
+  }
+
+  private readFile(file: any) {
+    let filename = file.name
     let reader = new FileReader()
-    reader.readAsText(this.fileRead)
 
+    reader.readAsText(file)
     reader.onload = (e) => {
-      let csv: string = reader.result
+      // 1. Collect data
+      let csv = reader.result
       let allTextLines = csv.split(/\n/)
       let axisX: number[] = []
       let axisY: number[] = []
 
+      // 2. Parse data
       for (let i = 0; i < allTextLines.length; i++) {
         let data = allTextLines[i].split(',');
 
@@ -37,12 +54,11 @@ export class DldGraphComponent implements OnInit {
         axisY.push(Number.parseFloat(data[1]))
       }
 
+      // 3. Submit data to graphs
+      let filenameWithoutExtension = filename.substr(0, filename.length - 4)
+
       this.axisX = axisX
-      setTimeout(() => {
-        this.dataSeries[0].data = axisY
-        this.dataSeries = this.dataSeries.slice()
-      });
-      this.spinner.hide()
+      this.dataSeries.push({ data: axisY, label: filenameWithoutExtension })
     }
   }
 }
