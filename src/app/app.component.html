@@ -1,12 +1,27 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" (click)="this.selectedLink = 'samples'">Samples</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" (click)="this.selectedLink = 'ecos'">ECOs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" (click)="this.selectedLink = 'dld'">DLD</a>
+        </li>
+    </ul>
+</nav>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" *ngIf="selectedLink === 'samples'">
+            <app-chart-samples></app-chart-samples>
+        </div>
+        <div class="col-md-12" *ngIf="selectedLink === 'ecos'">
             <app-eco-graph></app-eco-graph>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <app-chart-samples></app-chart-samples>
+        <div class="col-md-12" *ngIf="selectedLink === 'dld'">
+            <app-dld-graph></app-dld-graph>
         </div>
     </div>
 </div>

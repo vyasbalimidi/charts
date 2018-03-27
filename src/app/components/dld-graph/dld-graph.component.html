@@ -1,3 +1,24 @@
-<p>
-    DLD graph coming soon...
-</p>
+<ngx-spinner bdOpacity=0.8 bdColor="#e6e6e6" size="large" color="#166cad" type="ball-spin-clockwise"></ngx-spinner>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 header">
+            DLD
+        </div>
+    </div>
+</div>
+
+<hr>
+<input type="file" accept=".csv" class="btn btn-primary" (change)="convertFile($event)" />
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="display: block">
+                <canvas baseChart [datasets]="dataSeries" [labels]="axisX" [options]="{ scaleShowVerticalLines: false, responsive: true }"
+                    [legend]="true" [chartType]="'line'"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
