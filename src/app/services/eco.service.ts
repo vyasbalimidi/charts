@@ -8,7 +8,7 @@ export class EcoService {
   constructor(private http: HttpClient) { }
 
   downloadEcos() {
-    return this.http.get("http://53.88.75.34:9081/nc0/api/safira/eco/find?filter-tasks=present",
+    return this.http.get("http://www.mocky.io/v2/5b5dfaec32000010001cfa9d",
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json; charset=utf-8',
